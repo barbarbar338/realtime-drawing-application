@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	overflow: hidden;
+	font-family: "Comfortaa";
+}
+
+body {
+	background: url("../img/notepad.png") repeat;
+}
+
+#cursors {
+	position: relative;
+}
+
+#cursors .cursor {
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	background-image: url("../img/not-drawing.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#cursors .cursor div {
+	width: 36px;
+	height: 64px;
+	display: flex;
+}
+
+#cursors .cursor div p {
+	align-self: flex-end;
+	font-size: x-large;
+}
