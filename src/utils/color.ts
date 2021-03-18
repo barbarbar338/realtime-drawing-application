@@ -1,8 +1,14 @@
 // from https://codepen.io/sosuke/pen/Pjoqqp
 
 export class Color {
-	constructor(r, g, b) {
-		this.set(r, g, b);
+	public r: number;
+	public g: number;
+	public b: number;
+
+	constructor(r: number, g: number, b: number) {
+		this.r = this.clamp(r);
+		this.g = this.clamp(g);
+		this.b = this.clamp(b);
 	}
 
 	toString() {
@@ -11,7 +17,7 @@ export class Color {
 		)})`;
 	}
 
-	set(r, g, b) {
+	set(r: number, g: number, b: number) {
 		this.r = this.clamp(r);
 		this.g = this.clamp(g);
 		this.b = this.clamp(b);
@@ -76,7 +82,7 @@ export class Color {
 		]);
 	}
 
-	multiply(matrix) {
+	multiply(matrix: number[]) {
 		const newR = this.clamp(
 			this.r * matrix[0] + this.g * matrix[1] + this.b * matrix[2],
 		);
@@ -116,9 +122,8 @@ export class Color {
 		const b = this.b / 255;
 		const max = Math.max(r, g, b);
 		const min = Math.min(r, g, b);
-		let h,
-			s,
-			l = (max + min) / 2;
+		let h, s;
+		const l = (max + min) / 2;
 		if (max === min) {
 			h = s = 0;
 		} else {
@@ -137,16 +142,16 @@ export class Color {
 					h = (r - g) / d + 4;
 					break;
 			}
-			h /= 6;
+			(h as number) /= 6;
 		}
 		return {
-			h: h * 100,
+			h: (h as number) * 100,
 			s: s * 100,
 			l: l * 100,
 		};
 	}
 
-	clamp(value) {
+	clamp(value: number) {
 		if (value > 255) {
 			value = 255;
 		} else if (value < 0) {
@@ -157,7 +162,15 @@ export class Color {
 }
 
 export class Solver {
-	constructor(target) {
+	public target: Color;
+	public targetHSL: {
+		h: number;
+		s: number;
+		l: number;
+	};
+	public reusedColor: Color;
+
+	constructor(target: Color) {
 		this.target = target;
 		this.targetHSL = target.hsl();
 		this.reusedColor = new Color(0, 0, 0);
@@ -187,7 +200,7 @@ export class Solver {
 		return best;
 	}
 
-	solveNarrow(wide) {
+	solveNarrow(wide: any) {
 		const A = wide.loss;
 		const c = 2;
 		const A1 = A + 1;
@@ -195,7 +208,7 @@ export class Solver {
 		return this.spsa(A, a, c, wide.values, 500);
 	}
 
-	spsa(A, a, c, values, iters) {
+	spsa(A: any, a: any, c: any, values: any, iters: any) {
 		const alpha = 1;
 		const gamma = 0.16666666666666666;
 		let best = null;
@@ -224,7 +237,7 @@ export class Solver {
 		}
 		return { values: best, loss: bestLoss };
 
-		function fix(value, idx) {
+		function fix(value: number, idx: number) {
 			let max = 100;
 			if (idx === 2) {
 				max = 7500;
@@ -247,7 +260,7 @@ export class Solver {
 		}
 	}
 
-	loss(filters) {
+	loss(filters: number[]) {
 		const color = this.reusedColor;
 		color.set(0, 0, 0);
 		color.invert(filters[0] / 100);
@@ -266,8 +279,8 @@ export class Solver {
 			Math.abs(colorHSL.l - this.targetHSL.l)
 		);
 	}
-	css(filters) {
-		function fmt(idx, multiplier = 1) {
+	css(filters: number[]) {
+		function fmt(idx: number, multiplier = 1) {
 			return Math.round(filters[idx] * multiplier);
 		}
 		return `invert(${fmt(0)}%) sepia(${fmt(1)}%) saturate(${fmt(
@@ -278,7 +291,7 @@ export class Solver {
 	}
 }
 
-export function hexToRgb(hex) {
+export function hexToRgb(hex: string) {
 	const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
 	hex = hex.replace(shorthandRegex, (m, r, g, b) => {
 		return r + r + g + g + b + b;

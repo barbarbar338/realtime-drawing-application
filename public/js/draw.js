@@ -1,11 +1,12 @@
-import { username, id, color, filter } from "./utils/getCredentials.js";
+// Get local credentials
+const id = localStorage.getItem("id");
+if (!id) window.location.href = "/";
 
 // send initial data
-const socket = io(window.location.origin, {
-	query: `username=${username}&id=${id}&color=${color.replace(
-		"#",
-		"",
-	)}&filter=${encodeURIComponent(filter)}`,
+const socket = io(window.location.origin, { query: `id=${id}` });
+socket.on("no_credential", () => {
+	localStorage.removeItem("id");
+	window.location.href = "/";
 });
 
 // Client properties
@@ -53,30 +54,32 @@ $(() => {
 	 */
 	socket.on("moving", (data) => {
 		// If packets client is new to us, render its cursor
-		if (!cursors.has(data.id)) {
-			const cursor = $(
-				cursorTemplate
-					.replace("{color}", data.color)
-					.replace("{username}", data.username),
-			)
-				.appendTo("#cursors")
-				.css({ filter: data.filter });
-			cursors.set(data.id, cursor);
-		}
+		if (data.id != id) {
+			if (!cursors.has(data.id)) {
+				const cursor = $(
+					cursorTemplate
+						.replace("{color}", data.color)
+						.replace("{username}", data.username),
+				)
+					.appendTo("#cursors")
+					.css({ filter: data.filter });
+				cursors.set(data.id, cursor);
+			}
 
-		// set clients cursors position
-		cursors.get(data.id).css({
-			left: data.x,
-			top: data.y,
-			"background-image": data.isDrawing
-				? "url('../img/drawing.png')"
-				: "url('../img/not-drawing.png')",
-		});
+			// set clients cursors position
+			cursors.get(data.id).css({
+				left: data.x,
+				top: data.y,
+				"background-image": data.isDrawing
+					? "url('../img/drawing.png')"
+					: "url('../img/not-drawing.png')",
+			});
+		}
 
 		// and if client is drawing, draw on our canvas too
 		if (data.isDrawing && clients.has(data.id)) {
 			const client = clients.get(data.id);
-			drawLine(client.x, client.y, data.x, data.y, `#${data.color}`);
+			drawLine(client.x, client.y, data.x, data.y, `${data.color}`);
 		}
 
 		// set updated value for AFK check
@@ -117,7 +120,7 @@ $(() => {
 			lastEmit = Date.now();
 		}
 		if (isDrawing) {
-			drawLine(previous.x, previous.y, event.pageX, event.pageY, color);
+			//drawLine(previous.x, previous.y, event.pageX, event.pageY, "#000000");
 			previous.x = event.pageX;
 			previous.y = event.pageY;
 		}

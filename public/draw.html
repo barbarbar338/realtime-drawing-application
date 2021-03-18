@@ -8,16 +8,13 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no"
 		/>
+		<link rel="stylesheet" href="css/styles.css" />
 	</head>
 	<body>
-		<input type="text" placeholder="username" id="username" />
-		<input
-			type="text"
-			placeholder="preffered color (6 digit hex code)"
-			id="color"
-		/>
-		<button id="login">Login</button>
+		<div id="cursors"></div>
+		<canvas id="paper" width="4096" height="3112"></canvas>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="js/auth.js"></script>
+		<script src="js/socket.io.js"></script>
+		<script src="js/draw.js"></script>
 	</body>
 </html>

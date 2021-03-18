@@ -3,7 +3,7 @@
 export class Snowflake {
 	static EPOCH = 1581368400000;
 	static INCREMENT = 0;
-	static binaryToID(binary) {
+	static binaryToID(binary: string) {
 		let dec = "";
 		while (binary.length > 50) {
 			const high = parseInt(binary.slice(0, -32), 2);
@@ -25,7 +25,7 @@ export class Snowflake {
 		}
 		return dec;
 	}
-	static idToBinary(id) {
+	static idToBinary(id: string) {
 		let bin = "";
 		let high = parseInt(id.slice(0, -10)) || 0;
 		let low = parseInt(id.slice(-10));
@@ -49,7 +49,7 @@ export class Snowflake {
 			.padStart(12, "0")}`;
 		return this.binaryToID(BINARY);
 	}
-	static deconstruct(snowflake) {
+	static deconstruct(snowflake: string) {
 		const BINARY = this.idToBinary(snowflake).padStart(64, "0");
 		const timestamp = parseInt(BINARY.substring(0, 42), 2) + this.EPOCH;
 		const res = {
@@ -61,7 +61,7 @@ export class Snowflake {
 		};
 		return res;
 	}
-	static isSnowflake(snowflake) {
+	static isSnowflake(snowflake: string) {
 		const deconstructed = this.deconstruct(snowflake);
 		const timestamp = deconstructed.timestamp;
 		if (timestamp > this.EPOCH && timestamp <= 3619093655551) return true;
