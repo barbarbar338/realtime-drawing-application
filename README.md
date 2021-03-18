@@ -4,7 +4,7 @@ Draw something with your friends in real time! Your drawings, cursor location, u
 
 # 🚀 Example
 
-![Example GIF](https://storage.bariscodes.me/v1/storage/uploads/145521311198871557.gif)
+![Example GIF](example.gif)
 
 # 🏃‍♀️ Running
 
