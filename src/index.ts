@@ -9,6 +9,7 @@ import { Color, hexToRgb, Solver } from "./utils/color";
 import { CONFIG } from "./config";
 
 const app = express();
+const users = new Map<string, any>();
 
 // sending html file directly
 app.use(express.static("public"));
@@ -57,8 +58,13 @@ io.sockets.on("connection", async (socket) => {
 	 *	}
 	 */
 	const { id } = socket.handshake.query;
-	const credentials = await get(id as string);
+	const credentials = users.has(id as string)
+		? users.get(id as string)
+		: await get(id as string);
 	if (!credentials.id) socket.emit("no_credential");
+
+	// save user data to cache for fewer requests
+	users.set(id as string, credentials);
 
 	/**
 	 * Nothing fancy on server-side.
