@@ -6,6 +6,7 @@ import { json, urlencoded } from "body-parser";
 import { get, redisAdapter, set } from "./redis";
 import { Snowflake } from "./utils/snowflake";
 import { Color, hexToRgb, Solver } from "./utils/color";
+import { CONFIG } from "./config";
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.post("/credentials", async (req, res) => {
 	return res.status(201).json({ id: userID, username, color, filter });
 });
 
-const server = app.listen(3000, "0.0.0.0", () => {
+const server = app.listen(CONFIG.PORT, "0.0.0.0", () => {
 	pogger.success(
 		`Express server listenin on ${(server.address() as AddressInfo).port}`,
 	);
@@ -41,7 +42,7 @@ const server = app.listen(3000, "0.0.0.0", () => {
 // Initialize socket.io server
 const io = new Server(server, {
 	cors: {
-		origin: "http://localhost:3000",
+		origin: "http://localhost:3000,https://draw.fly.dev/",
 	},
 	adapter: redisAdapter,
 });
