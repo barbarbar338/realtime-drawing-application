@@ -81,6 +81,7 @@ io.sockets.on("connection", async (socket) => {
 	 *
 	 */
 	socket.on("mousemove", async (packet) => {
+		packet.width = packet.width > 10 || packet.width < 1 ? 5 : packet.width;
 		const data = { ...packet, ...credentials };
 		io.emit("moving", { ...data, ...credentials });
 	});
