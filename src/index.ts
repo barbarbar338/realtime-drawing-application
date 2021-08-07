@@ -3,7 +3,7 @@ import * as pogger from "pogger";
 import { AddressInfo } from "net";
 import { Server } from "socket.io";
 import { json, urlencoded } from "body-parser";
-import { get, redisAdapter, set } from "./redis";
+import { get, set } from "./redis";
 import { Snowflake } from "./utils/snowflake";
 import { Color, hexToRgb, Solver } from "./utils/color";
 import { CONFIG } from "./config";
@@ -43,9 +43,8 @@ const server = app.listen(CONFIG.PORT, "0.0.0.0", () => {
 // Initialize socket.io server
 const io = new Server(server, {
 	cors: {
-		origin: "http://localhost:3000,https://draw.fly.dev/",
+		origin: `http://localhost:${CONFIG.PORT},https://draw.fly.dev/`,
 	},
-	adapter: redisAdapter,
 });
 
 io.sockets.on("connection", async (socket) => {
@@ -55,7 +54,7 @@ io.sockets.on("connection", async (socket) => {
 	 * incoming packet:
 	 * {
 	 *		id: string;
-	 *	}
+	 * }
 	 */
 	const { id } = socket.handshake.query;
 	const credentials = users.has(id as string)
