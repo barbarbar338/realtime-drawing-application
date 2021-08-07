@@ -31,6 +31,7 @@ app.post("/credentials", async (req, res) => {
 	const solver = new Solver(colorParser);
 	const { filter } = solver.solve();
 	await set(userID, { id: userID, username, color, filter });
+	users.set(userID, { id: userID, username, color, filter });
 	return res.status(201).json({ id: userID, username, color, filter });
 });
 
@@ -73,6 +74,7 @@ io.sockets.on("connection", async (socket) => {
 	 * {
 	 * 		x: number;
 	 *		y: number;
+	 *		width: number;
 	 *		isDrawing: boolean;
 	 *		id: number;
 	 * }

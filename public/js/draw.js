@@ -13,6 +13,7 @@ socket.on("no_credential", () => {
 const previous = {};
 let isDrawing = false;
 let lastEmit = Date.now();
+let width = parseInt(localStorage.getItem("width")) || 5;
 
 // cursors and clients to render
 const clients = new Map();
@@ -38,6 +39,17 @@ $(() => {
 	const doc = $(document);
 	const canvas = $("#paper");
 	const context = canvas[0].getContext("2d");
+	const slider = $("#width-slider");
+	const output = $("#width-output");
+
+	// show users line width
+	output.text(`Line Width: ${width}px`);
+	slider.val(width);
+	slider.on("input", (data) => {
+		width = data.target.value;
+		localStorage.setItem("width", width);
+		output.text(`Line Width: ${width}px`);
+	});
 
 	/**
 	 * Get move data from other clients. See "mousemove" event on server-side
@@ -79,7 +91,14 @@ $(() => {
 		// and if client is drawing, draw on our canvas too
 		if (data.isDrawing && clients.has(data.id)) {
 			const client = clients.get(data.id);
-			drawLine(client.x, client.y, data.x, data.y, `${data.color}`);
+			drawLine(
+				client.x,
+				client.y,
+				data.x,
+				data.y,
+				`${data.color}`,
+				data.width,
+			);
 		}
 
 		// set updated value for AFK check
@@ -116,11 +135,11 @@ $(() => {
 				y: event.pageY,
 				isDrawing,
 				id,
+				width,
 			});
 			lastEmit = Date.now();
 		}
 		if (isDrawing) {
-			//drawLine(previous.x, previous.y, event.pageX, event.pageY, "#000000");
 			previous.x = event.pageX;
 			previous.y = event.pageY;
 		}
@@ -137,9 +156,10 @@ $(() => {
 		});
 	}, timeout);
 
-	// draw a line on canvas from (x1, y1) to (x2, y2) with color (color)
-	function drawLine(x1, y1, x2, y2, color) {
+	// draw a line on canvas from (x1, y1) to (x2, y2) with color (color) and width (width)
+	function drawLine(x1, y1, x2, y2, color, width) {
 		context.strokeStyle = color;
+		context.lineWidth = width;
 		context.beginPath();
 		context.moveTo(x1, y1);
 		context.lineTo(x2, y2);

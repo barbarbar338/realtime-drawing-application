@@ -12,6 +12,17 @@
 	</head>
 	<body>
 		<div id="cursors"></div>
+		<div class="slider-container">
+			<p id="width-output">Line Width</p>
+			<input
+				type="range"
+				min="1"
+				max="10"
+				value="5"
+				class="slider"
+				id="width-slider"
+			/>
+		</div>
 		<canvas id="paper" width="4096" height="3112"></canvas>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="js/socket.io.js"></script>
