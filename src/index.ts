@@ -5,7 +5,6 @@ import * as pogger from "pogger";
 import { Server } from "socket.io";
 import { CONFIG } from "./config";
 import { Color, Solver, hexToRgb } from "./utils/color";
-import { Snowflake } from "./utils/snowflake";
 
 const app = express();
 const users = new Map<string, any>();
@@ -24,7 +23,7 @@ app.post("/credentials", async (req, res) => {
 		return res.status(400).json({ message: "username and color expected" });
 	if (!colorRegex.test(color))
 		return res.status(400).json({ message: "invalid color code" });
-	const userID = id || Snowflake.generate();
+	const userID = id || CONFIG.PIKA.gen("user");
 	const rgb = hexToRgb(color) as number[];
 	const colorParser = new Color(rgb[0], rgb[1], rgb[2]);
 	const solver = new Solver(colorParser);
