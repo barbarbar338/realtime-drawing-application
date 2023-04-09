@@ -3,3 +3,14 @@ node_modules
 .env
 example.gif
 dist
+fly.toml
+Dockerfile
+.dockerignore
+README.md
+.git
+.gitignore
+LICENSE
+.eslingignore
+.eslintrc
+.prettierrc
+.prettierignore

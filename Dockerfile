@@ -1,15 +1,22 @@
-FROM debian
-
-RUN apt-get update && apt-get upgrade -y && apt-get install -y curl software-properties-common git make python gcc g++ && curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs && apt-get clean
-
-ENV PORT=8080
-
-EXPOSE ${PORT}
+FROM node:16-alpine AS builder
 
 WORKDIR /app
-
 COPY . .
 
-RUN npm i -g yarn && yarn && yarn build
+RUN yarn install --frozen-lockfile
+
+RUN yarn build
+
+FROM node:16-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 draw
+
+COPY --from=builder /app ./
+
+USER draw
 
 CMD ["yarn", "start"]
