@@ -13,7 +13,7 @@ export const CONFIG = {
 			},
 		],
 		{
-			epoch: new Date("2020-02-10T21:00:00.000Z").getTime(),
+			epoch: new Date("02.10.2020 21:00:00").getTime(),
 		},
 	),
 };
