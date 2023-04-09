@@ -32,7 +32,7 @@ app.post("/credentials", async (req, res) => {
 	return res.status(201).json({ id: userID, username, color, filter });
 });
 
-const server = app.listen(CONFIG.PORT, "0.0.0.0", () => {
+const server = app.listen(CONFIG.PORT, "::", () => {
 	pogger.success(
 		`Express server listenin on ${(server.address() as AddressInfo).port}`,
 	);
