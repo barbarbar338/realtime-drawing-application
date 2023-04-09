@@ -149,7 +149,8 @@ $(() => {
 		clients.forEach((client) => {
 			if (client.updated > timeout) {
 				clients.delete(client.id);
-				cursors.get(client.id).remove();
+				const cursor = cursors.get(client.id);
+				if (cursor) cursor.remove();
 				cursors.delete(client.id);
 			}
 		});
