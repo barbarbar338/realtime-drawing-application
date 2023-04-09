@@ -1,12 +1,11 @@
-import express from "express";
-import * as pogger from "pogger";
-import { AddressInfo } from "net";
-import { Server } from "socket.io";
 import { json, urlencoded } from "body-parser";
-import { get, set } from "./redis";
-import { Snowflake } from "./utils/snowflake";
-import { Color, hexToRgb, Solver } from "./utils/color";
+import express from "express";
+import { AddressInfo } from "net";
+import * as pogger from "pogger";
+import { Server } from "socket.io";
 import { CONFIG } from "./config";
+import { Color, Solver, hexToRgb } from "./utils/color";
+import { Snowflake } from "./utils/snowflake";
 
 const app = express();
 const users = new Map<string, any>();
@@ -30,7 +29,6 @@ app.post("/credentials", async (req, res) => {
 	const colorParser = new Color(rgb[0], rgb[1], rgb[2]);
 	const solver = new Solver(colorParser);
 	const { filter } = solver.solve();
-	await set(userID, { id: userID, username, color, filter });
 	users.set(userID, { id: userID, username, color, filter });
 	return res.status(201).json({ id: userID, username, color, filter });
 });
@@ -58,9 +56,7 @@ io.sockets.on("connection", async (socket) => {
 	 * }
 	 */
 	const { id } = socket.handshake.query;
-	const credentials = users.has(id as string)
-		? users.get(id as string)
-		: await get(id as string);
+	const credentials = users.get(id as string);
 	if (!credentials.id) socket.emit("no_credential");
 
 	// save user data to cache for fewer requests
