@@ -56,7 +56,7 @@ io.sockets.on("connection", async (socket) => {
 	 */
 	const { id } = socket.handshake.query;
 	const credentials = users.get(id as string);
-	if (!credentials.id) socket.emit("no_credential");
+	if (!credentials || !credentials.id) socket.emit("no_credential");
 
 	// save user data to cache for fewer requests
 	users.set(id as string, credentials);
