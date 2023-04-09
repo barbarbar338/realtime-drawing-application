@@ -75,37 +75,35 @@
 			/******/
 		}; // create a fake namespace object // mode & 1: value is a module id, require it // mode & 2: merge all properties of value into the ns // mode & 4: return value when already ns object // mode & 8|1: behave like require
 		/******/
-		/******/ /******/ /******/ /******/ /******/ /******/ __webpack_require__.t = function (
-			value,
-			mode,
-		) {
-			/******/ if (mode & 1) value = __webpack_require__(value);
-			/******/ if (mode & 8) return value;
-			/******/ if (
-				mode & 4 &&
-				typeof value === "object" &&
-				value &&
-				value.__esModule
-			)
-				return value;
-			/******/ var ns = Object.create(null);
-			/******/ __webpack_require__.r(ns);
-			/******/ Object.defineProperty(ns, "default", {
-				enumerable: true,
-				value: value,
-			});
-			/******/ if (mode & 2 && typeof value != "string")
-				for (var key in value)
-					__webpack_require__.d(
-						ns,
-						key,
-						function (key) {
-							return value[key];
-						}.bind(null, key),
-					);
-			/******/ return ns;
-			/******/
-		}; // getDefaultExport function for compatibility with non-harmony modules
+		/******/ /******/ /******/ /******/ /******/ /******/ __webpack_require__.t =
+			function (value, mode) {
+				/******/ if (mode & 1) value = __webpack_require__(value);
+				/******/ if (mode & 8) return value;
+				/******/ if (
+					mode & 4 &&
+					typeof value === "object" &&
+					value &&
+					value.__esModule
+				)
+					return value;
+				/******/ var ns = Object.create(null);
+				/******/ __webpack_require__.r(ns);
+				/******/ Object.defineProperty(ns, "default", {
+					enumerable: true,
+					value: value,
+				});
+				/******/ if (mode & 2 && typeof value != "string")
+					for (var key in value)
+						__webpack_require__.d(
+							ns,
+							key,
+							function (key) {
+								return value[key];
+							}.bind(null, key),
+						);
+				/******/ return ns;
+				/******/
+			}; // getDefaultExport function for compatibility with non-harmony modules
 		/******/
 		/******/ /******/ __webpack_require__.n = function (module) {
 			/******/ var getter =
@@ -168,7 +166,11 @@
 					Object.defineProperty(exports, "__esModule", {
 						value: true,
 					});
-					exports.Socket = exports.io = exports.Manager = exports.protocol = void 0;
+					exports.Socket =
+						exports.io =
+						exports.Manager =
+						exports.protocol =
+							void 0;
 
 					var url_1 = __webpack_require__(
 						/*! ./url */ "./build/url.js",
@@ -389,13 +391,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -899,9 +902,8 @@
 								key: "_packet",
 								value: function _packet(packet) {
 									debug("writing packet %j", packet);
-									var encodedPackets = this.encoder.encode(
-										packet,
-									);
+									var encodedPackets =
+										this.encoder.encode(packet);
 
 									for (
 										var i = 0;
@@ -1328,13 +1330,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -1592,8 +1595,8 @@
 
 									args.unshift(ev);
 									var packet = {
-										type:
-											socket_io_parser_1.PacketType.EVENT,
+										type: socket_io_parser_1.PacketType
+											.EVENT,
 										data: args,
 									};
 									packet.options = {};
@@ -1664,17 +1667,15 @@
 									if (typeof this.auth == "function") {
 										this.auth(function (data) {
 											_this2.packet({
-												type:
-													socket_io_parser_1
-														.PacketType.CONNECT,
+												type: socket_io_parser_1
+													.PacketType.CONNECT,
 												data: data,
 											});
 										});
 									} else {
 										this.packet({
-											type:
-												socket_io_parser_1.PacketType
-													.CONNECT,
+											type: socket_io_parser_1.PacketType
+												.CONNECT,
 											data: this.auth,
 										});
 									}
@@ -1816,11 +1817,13 @@
 										this._anyListeners &&
 										this._anyListeners.length
 									) {
-										var listeners = this._anyListeners.slice();
+										var listeners =
+											this._anyListeners.slice();
 
-										var _iterator = _createForOfIteratorHelper(
-												listeners,
-											),
+										var _iterator =
+												_createForOfIteratorHelper(
+													listeners,
+												),
 											_step;
 
 										try {
@@ -1873,9 +1876,8 @@
 
 										debug("sending ack %j", args);
 										self.packet({
-											type:
-												socket_io_parser_1.PacketType
-													.ACK,
+											type: socket_io_parser_1.PacketType
+												.ACK,
 											id: id,
 											data: args,
 										});
@@ -1993,9 +1995,8 @@
 											this.nsp,
 										);
 										this.packet({
-											type:
-												socket_io_parser_1.PacketType
-													.DISCONNECT,
+											type: socket_io_parser_1.PacketType
+												.DISCONNECT,
 										});
 									} // remove socket from pool
 
@@ -2282,13 +2283,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -2770,15 +2772,13 @@
 					 * @api public
 					 */
 
-					Emitter.prototype.on = Emitter.prototype.addEventListener = function (
-						event,
-						fn,
-					) {
-						this._callbacks = this._callbacks || {};
-						(this._callbacks["$" + event] =
-							this._callbacks["$" + event] || []).push(fn);
-						return this;
-					};
+					Emitter.prototype.on = Emitter.prototype.addEventListener =
+						function (event, fn) {
+							this._callbacks = this._callbacks || {};
+							(this._callbacks["$" + event] =
+								this._callbacks["$" + event] || []).push(fn);
+							return this;
+						};
 					/**
 					 * Adds an `event` listener that will be invoked a single
 					 * time then automatically removed.
@@ -2809,43 +2809,44 @@
 					 * @api public
 					 */
 
-					Emitter.prototype.off = Emitter.prototype.removeListener = Emitter.prototype.removeAllListeners = Emitter.prototype.removeEventListener = function (
-						event,
-						fn,
-					) {
-						this._callbacks = this._callbacks || {}; // all
+					Emitter.prototype.off =
+						Emitter.prototype.removeListener =
+						Emitter.prototype.removeAllListeners =
+						Emitter.prototype.removeEventListener =
+							function (event, fn) {
+								this._callbacks = this._callbacks || {}; // all
 
-						if (0 == arguments.length) {
-							this._callbacks = {};
-							return this;
-						} // specific event
+								if (0 == arguments.length) {
+									this._callbacks = {};
+									return this;
+								} // specific event
 
-						var callbacks = this._callbacks["$" + event];
-						if (!callbacks) return this; // remove all handlers
+								var callbacks = this._callbacks["$" + event];
+								if (!callbacks) return this; // remove all handlers
 
-						if (1 == arguments.length) {
-							delete this._callbacks["$" + event];
-							return this;
-						} // remove specific handler
+								if (1 == arguments.length) {
+									delete this._callbacks["$" + event];
+									return this;
+								} // remove specific handler
 
-						var cb;
+								var cb;
 
-						for (var i = 0; i < callbacks.length; i++) {
-							cb = callbacks[i];
+								for (var i = 0; i < callbacks.length; i++) {
+									cb = callbacks[i];
 
-							if (cb === fn || cb.fn === fn) {
-								callbacks.splice(i, 1);
-								break;
-							}
-						} // Remove event specific arrays for event types that no
-						// one is subscribed for to avoid memory leak.
+									if (cb === fn || cb.fn === fn) {
+										callbacks.splice(i, 1);
+										break;
+									}
+								} // Remove event specific arrays for event types that no
+								// one is subscribed for to avoid memory leak.
 
-						if (callbacks.length === 0) {
-							delete this._callbacks["$" + event];
-						}
+								if (callbacks.length === 0) {
+									delete this._callbacks["$" + event];
+								}
 
-						return this;
-					};
+								return this;
+							};
 					/**
 					 * Emit `event` with the given args.
 					 *
@@ -3448,9 +3449,8 @@
 							createDebug.names = [];
 							createDebug.skips = [];
 							var i;
-							var split = (typeof namespaces === "string"
-								? namespaces
-								: ""
+							var split = (
+								typeof namespaces === "string" ? namespaces : ""
 							).split(/[\s,]+/);
 							var len = split.length;
 
@@ -3762,13 +3762,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -4063,9 +4064,8 @@
 									this.readyState = "opening"; // Retry with the next transport if the transport is disabled (jsonp: false)
 
 									try {
-										transport = this.createTransport(
-											transport,
-										);
+										transport =
+											this.createTransport(transport);
 									} catch (e) {
 										debug(
 											"error while creating transport: %s",
@@ -4199,8 +4199,7 @@
 															);
 															transport.send([
 																{
-																	type:
-																		"upgrade",
+																	type: "upgrade",
 																},
 															]);
 															self.emit(
@@ -4485,7 +4484,8 @@
 										this.transport.send(this.writeBuffer); // keep track of current length of writeBuffer
 										// splice writeBuffer and callbackBuffer on `drain`
 
-										this.prevBufferLen = this.writeBuffer.length;
+										this.prevBufferLen =
+											this.writeBuffer.length;
 										this.emit("flush");
 									}
 								},
@@ -4858,13 +4858,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -5289,13 +5290,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -5458,9 +5460,8 @@
 								key: "doPoll",
 								value: function doPoll() {
 									var self = this;
-									var script = document.createElement(
-										"script",
-									);
+									var script =
+										document.createElement("script");
 
 									if (this.script) {
 										this.script.parentNode.removeChild(
@@ -5476,9 +5477,10 @@
 										self.onError("jsonp poll error", e);
 									};
 
-									var insertAt = document.getElementsByTagName(
-										"script",
-									)[0];
+									var insertAt =
+										document.getElementsByTagName(
+											"script",
+										)[0];
 
 									if (insertAt) {
 										insertAt.parentNode.insertBefore(
@@ -5498,9 +5500,10 @@
 
 									if (isUAgecko) {
 										setTimeout(function () {
-											var iframe = document.createElement(
-												"iframe",
-											);
+											var iframe =
+												document.createElement(
+													"iframe",
+												);
 											document.body.appendChild(iframe);
 											document.body.removeChild(iframe);
 										}, 100);
@@ -5521,12 +5524,10 @@
 									var iframe;
 
 									if (!this.form) {
-										var form = document.createElement(
-											"form",
-										);
-										var area = document.createElement(
-											"textarea",
-										);
+										var form =
+											document.createElement("form");
+										var area =
+											document.createElement("textarea");
 										var id = (this.iframeId =
 											"eio_iframe_" + this.index);
 										form.className = "socketio";
@@ -5573,13 +5574,13 @@
 												'<iframe src="javascript:0" name="' +
 												self.iframeId +
 												'">';
-											iframe = document.createElement(
-												html,
-											);
+											iframe =
+												document.createElement(html);
 										} catch (e) {
-											iframe = document.createElement(
-												"iframe",
-											);
+											iframe =
+												document.createElement(
+													"iframe",
+												);
 											iframe.name = self.iframeId;
 											iframe.src = "javascript:0";
 										}
@@ -5606,14 +5607,15 @@
 									} catch (e) {}
 
 									if (this.iframe.attachEvent) {
-										this.iframe.onreadystatechange = function () {
-											if (
-												self.iframe.readyState ===
-												"complete"
-											) {
-												complete();
-											}
-										};
+										this.iframe.onreadystatechange =
+											function () {
+												if (
+													self.iframe.readyState ===
+													"complete"
+												) {
+													complete();
+												}
+											};
 									} else {
 										this.iframe.onload = complete;
 									}
@@ -5757,13 +5759,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -6091,11 +6094,13 @@
 										} catch (e) {} // ie6 check
 
 										if ("withCredentials" in xhr) {
-											xhr.withCredentials = this.opts.withCredentials;
+											xhr.withCredentials =
+												this.opts.withCredentials;
 										}
 
 										if (this.opts.requestTimeout) {
-											xhr.timeout = this.opts.requestTimeout;
+											xhr.timeout =
+												this.opts.requestTimeout;
 										}
 
 										if (this.hasXDR()) {
@@ -6107,28 +6112,29 @@
 												self.onError(xhr.responseText);
 											};
 										} else {
-											xhr.onreadystatechange = function () {
-												if (4 !== xhr.readyState)
-													return;
+											xhr.onreadystatechange =
+												function () {
+													if (4 !== xhr.readyState)
+														return;
 
-												if (
-													200 === xhr.status ||
-													1223 === xhr.status
-												) {
-													self.onLoad();
-												} else {
-													// make sure the `error` event handler that's user-set
-													// does not throw in the same tick and gets caught here
-													setTimeout(function () {
-														self.onError(
-															typeof xhr.status ===
-																"number"
-																? xhr.status
-																: 0,
-														);
-													}, 0);
-												}
-											};
+													if (
+														200 === xhr.status ||
+														1223 === xhr.status
+													) {
+														self.onLoad();
+													} else {
+														// make sure the `error` event handler that's user-set
+														// does not throw in the same tick and gets caught here
+														setTimeout(function () {
+															self.onError(
+																typeof xhr.status ===
+																	"number"
+																	? xhr.status
+																	: 0,
+															);
+														}, 0);
+													}
+												};
 										}
 
 										debug("xhr data %s", this.data);
@@ -6201,7 +6207,8 @@
 									} // xmlhttprequest
 
 									if (this.hasXDR()) {
-										this.xhr.onload = this.xhr.onerror = empty;
+										this.xhr.onload = this.xhr.onerror =
+											empty;
 									} else {
 										this.xhr.onreadystatechange = empty;
 									}
@@ -6403,13 +6410,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -6711,9 +6719,8 @@
 									var port = ""; // cache busting is forced
 
 									if (false !== this.opts.timestampRequests) {
-										query[
-											this.opts.timestampParam
-										] = yeast();
+										query[this.opts.timestampParam] =
+											yeast();
 									}
 
 									if (!this.supportsBinary && !query.sid) {
@@ -6890,13 +6897,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -7265,9 +7273,8 @@
 									} // append timestamp to URI
 
 									if (this.opts.timestampRequests) {
-										query[
-											this.opts.timestampParam
-										] = yeast();
+										query[this.opts.timestampParam] =
+											yeast();
 									} // communicate binary support capabilities
 
 									if (!this.supportsBinary) {
@@ -7897,9 +7904,10 @@
 							return;
 						}
 
-						var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
-							str,
-						);
+						var match =
+							/^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+								str,
+							);
 
 						if (!match) {
 							return;
@@ -8074,9 +8082,8 @@
 
 						for (var i = 0, l = pairs.length; i < l; i++) {
 							var pair = pairs[i].split("=");
-							qry[
-								decodeURIComponent(pair[0])
-							] = decodeURIComponent(pair[1]);
+							qry[decodeURIComponent(pair[0])] =
+								decodeURIComponent(pair[1]);
 						}
 
 						return qry;
@@ -8097,7 +8104,8 @@
 					 * @author Steven Levithan <stevenlevithan.com> (MIT license)
 					 * @api private
 					 */
-					var re = /^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/;
+					var re =
+						/^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/;
 					var parts = [
 						"source",
 						"protocol",
@@ -8216,7 +8224,8 @@
 					Object.defineProperty(exports, "__esModule", {
 						value: true,
 					});
-					exports.reconstructPacket = exports.deconstructPacket = void 0;
+					exports.reconstructPacket = exports.deconstructPacket =
+						void 0;
 
 					var is_binary_1 = __webpack_require__(
 						/*! ./is-binary */ "./node_modules/socket.io-parser/dist/is-binary.js",
@@ -8425,13 +8434,14 @@
 					}
 
 					function _createSuper(Derived) {
-						var hasNativeReflectConstruct = _isNativeReflectConstruct();
+						var hasNativeReflectConstruct =
+							_isNativeReflectConstruct();
 						return function _createSuperInternal() {
 							var Super = _getPrototypeOf(Derived),
 								result;
 							if (hasNativeReflectConstruct) {
-								var NewTarget = _getPrototypeOf(this)
-									.constructor;
+								var NewTarget =
+									_getPrototypeOf(this).constructor;
 								result = Reflect.construct(
 									Super,
 									arguments,
@@ -8535,7 +8545,11 @@
 					Object.defineProperty(exports, "__esModule", {
 						value: true,
 					});
-					exports.Decoder = exports.Encoder = exports.PacketType = exports.protocol = void 0;
+					exports.Decoder =
+						exports.Encoder =
+						exports.PacketType =
+						exports.protocol =
+							void 0;
 
 					var Emitter = __webpack_require__(
 						/*! component-emitter */ "./node_modules/component-emitter/index.js",
@@ -8656,9 +8670,8 @@
 							{
 								key: "encodeAsBinary",
 								value: function encodeAsBinary(obj) {
-									var deconstruction = binary_1.deconstructPacket(
-										obj,
-									);
+									var deconstruction =
+										binary_1.deconstructPacket(obj);
 									var pack = this.encodeAsString(
 										deconstruction.packet,
 									);
@@ -8714,9 +8727,10 @@
 													PacketType.BINARY_ACK
 											) {
 												// binary packet's json
-												this.reconstructor = new BinaryReconstructor(
-													packet,
-												); // no attachments, labeled binary but no binary data to follow
+												this.reconstructor =
+													new BinaryReconstructor(
+														packet,
+													); // no attachments, labeled binary but no binary data to follow
 
 												if (packet.attachments === 0) {
 													_get(
@@ -8751,9 +8765,10 @@
 													"got binary data when not reconstructing a packet",
 												);
 											} else {
-												packet = this.reconstructor.takeBinaryData(
-													obj,
-												);
+												packet =
+													this.reconstructor.takeBinaryData(
+														obj,
+													);
 
 												if (packet) {
 													// received final buffer
@@ -9146,9 +9161,10 @@
 				/***/ function (module, exports, __webpack_require__) {
 					"use strict";
 
-					var alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_".split(
-							"",
-						),
+					var alphabet =
+							"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_".split(
+								"",
+							),
 						length = 64,
 						map = {},
 						seed = 0,

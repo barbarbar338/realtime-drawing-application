@@ -11,11 +11,10 @@ export class Color {
 		this.b = this.clamp(b);
 	}
 
-	toString() {
-		return `rgb(${Math.round(this.r)}, ${Math.round(this.g)}, ${Math.round(
+	toString = () =>
+		`rgb(${Math.round(this.r)}, ${Math.round(this.g)}, ${Math.round(
 			this.b,
 		)})`;
-	}
 
 	set(r: number, g: number, b: number) {
 		this.r = this.clamp(r);
@@ -40,7 +39,7 @@ export class Color {
 		]);
 	}
 
-	grayscale(value = 1) {
+	grayscale = (value = 1) =>
 		this.multiply([
 			0.2126 + 0.7874 * (1 - value),
 			0.7152 - 0.7152 * (1 - value),
@@ -52,9 +51,8 @@ export class Color {
 			0.7152 - 0.7152 * (1 - value),
 			0.0722 + 0.9278 * (1 - value),
 		]);
-	}
 
-	sepia(value = 1) {
+	sepia = (value = 1) =>
 		this.multiply([
 			0.393 + 0.607 * (1 - value),
 			0.769 - 0.769 * (1 - value),
@@ -66,9 +64,8 @@ export class Color {
 			0.534 - 0.534 * (1 - value),
 			0.131 + 0.869 * (1 - value),
 		]);
-	}
 
-	saturate(value = 1) {
+	saturate = (value = 1) =>
 		this.multiply([
 			0.213 + 0.787 * value,
 			0.715 - 0.715 * value,
@@ -80,7 +77,6 @@ export class Color {
 			0.715 - 0.715 * value,
 			0.072 + 0.928 * value,
 		]);
-	}
 
 	multiply(matrix: number[]) {
 		const newR = this.clamp(
@@ -97,12 +93,9 @@ export class Color {
 		this.b = newB;
 	}
 
-	brightness(value = 1) {
-		this.linear(value);
-	}
-	contrast(value = 1) {
-		this.linear(value, -(0.5 * value) + 0.5);
-	}
+	brightness = (value = 1) => this.linear(value);
+
+	contrast = (value = 1) => this.linear(value, -(0.5 * value) + 0.5);
 
 	linear(slope = 1, intercept = 0) {
 		this.r = this.clamp(this.r * slope + intercept * 255);
