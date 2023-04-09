@@ -37,8 +37,10 @@ const cursorTemplate = `
 
 $(() => {
 	const doc = $(document);
+
 	const canvas = $("#paper");
-	const context = canvas[0].getContext("2d");
+	const rc = rough.canvas(canvas[0]);
+
 	const slider = $("#width-slider");
 	const output = $("#width-output");
 
@@ -91,14 +93,11 @@ $(() => {
 		// and if client is drawing, draw on our canvas too
 		if (data.isDrawing && clients.has(data.id)) {
 			const client = clients.get(data.id);
-			drawLine(
-				client.x,
-				client.y,
-				data.x,
-				data.y,
-				`${data.color}`,
-				data.width,
-			);
+
+			rc.line(client.x, client.y, data.x, data.y, {
+				strokeWidth: data.width,
+				stroke: data.color,
+			});
 		}
 
 		// set updated value for AFK check
@@ -155,14 +154,4 @@ $(() => {
 			}
 		});
 	}, timeout);
-
-	// draw a line on canvas from (x1, y1) to (x2, y2) with color (color) and width (width)
-	function drawLine(x1, y1, x2, y2, color, width) {
-		context.strokeStyle = color;
-		context.lineWidth = width;
-		context.beginPath();
-		context.moveTo(x1, y1);
-		context.lineTo(x2, y2);
-		context.stroke();
-	}
 });
